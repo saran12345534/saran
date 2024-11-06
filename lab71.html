@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Guessing Game</title>
+  <style>
+    .container {
+      max-width: 300px;
+      margin: auto;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    input, button {
+      margin: 8px 0;
+      padding: 8px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Simple Guessing Game</h2>
+  
+  <!-- Radio buttons for selecting option -->
+  <label>
+    <input type="radio" name="guessOption" value="over35"> Over 35
+  </label>
+  <br>
+  <label>
+    <input type="radio" name="guessOption" value="below35"> Below 35
+  </label>
+  <br><br>
+
+  <!-- Textbox to display the generated random number -->
+  <input type="text" id="randomNumber" placeholder="Random Number" disabled>
+  
+  <!-- Button to run the game -->
+  <button onclick="runGame()">RUN</button>
+</div>
+
+<script>
+  function runGame() {
+    // Generate a random number between 0 and 70
+    const randomNumber = Math.floor(Math.random() * 71);
+    document.getElementById("randomNumber").value = randomNumber; // Display the random number
+
+    // Get the selected option (either 'over35' or 'below35')
+    const guessOption = document.querySelector('input[name="guessOption"]:checked');
+    
+    if (!guessOption) {
+      alert("Please select either 'Over 35' or 'Below 35' before clicking RUN.");
+      return;
+    }
+
+    // Check if the number is over or below 35 and display result
+    let message;
+    if (randomNumber === 35) {
+      message = "It was a tie: please try again";
+    } else if (guessOption.value === "over35" && randomNumber > 35) {
+      message = "WIN: good bet.";
+    } else if (guessOption.value === "below35" && randomNumber < 35) {
+      message = "WIN: good bet.";
+    } else {
+      message = "Lose: wrong bet.";
+    }
+
+    // Show an alert with the result message
+    alert(message);
+  }
+</script>
+
+</body>
+</html>
